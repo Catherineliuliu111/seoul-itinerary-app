@@ -6,6 +6,7 @@ import {
   ChevronDown,
   Clock3,
   Coffee,
+  Copy,
   CreditCard,
   MapPin,
   Navigation,
@@ -43,6 +44,7 @@ type Stop = {
     detail: string;
     order: string;
     logistics: string;
+    address: string;
   }[];
 };
 
@@ -95,6 +97,17 @@ const plans: DayPlan[] = [
         transport: "酒店步行或短程打车，尽量避开正晚餐排队高峰。",
         highlights: ["第一餐直接进入韩式重口味", "牛肠、炒饭、泡菜组合最稳", "吃完就近出发去汝矣岛"],
         must: ["牛肠拼盘", "最后加炒饭", "不要拖到 19:00 后再出发"],
+        places: [
+          {
+            name: "군자대한곱창 명동점",
+            specialty: "华沙同款烤牛肠；明洞晚餐",
+            image: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=900&q=80",
+            detail: "明洞落地第一餐，主打韩式牛肠、烤大肠和最后炒饭。",
+            order: "牛肠拼盘 + 炒饭；能吃辣再加辣炒类。",
+            logistics: "落地日别排太久，吃完要赶去 The Hyundai 和汉江。",
+            address: "서울특별시 중구 명동7길 18-1 1층",
+          },
+        ],
       },
       {
         time: "18:15 - 20:20",
@@ -112,6 +125,7 @@ const plans: DayPlan[] = [
             detail: "The Hyundai Seoul 的标志性中庭，空间开阔，第一晚时间不多时优先打卡这里。",
             order: "不买东西也值得上去看一眼，拍完再下 B1/B2。",
             logistics: "百货本体大约 20:00 左右结束营业，建议先拍中庭再逛地下层。",
+            address: "서울특별시 영등포구 여의대로 108 (여의도동)",
           },
           {
             name: "B1/B2 食品区",
@@ -120,6 +134,7 @@ const plans: DayPlan[] = [
             detail: "最适合短时间快逛：甜品、咖啡、烘焙、熟食和小包装伴手礼集中。",
             order: "买轻便零食、饼干、巧克力和咖啡，不建议买太重的盒装礼物。",
             logistics: "从这里去汉江公园方便，买完直接步行去 Yeouinaru。",
+            address: "서울특별시 영등포구 여의대로 108 (여의도동)",
           },
           {
             name: "生活方式/设计品牌区",
@@ -128,6 +143,7 @@ const plans: DayPlan[] = [
             detail: "适合买韩国本土设计小物，比免税店更容易发现特别款。",
             order: "看杯子、香氛、家居摆件、小包和文具类。",
             logistics: "如果只剩 30 分钟，优先 B1/B2；时间够再逛设计区。",
+            address: "서울특별시 영등포구 여의대로 108 (여의도동)",
           },
         ],
       },
@@ -139,6 +155,26 @@ const plans: DayPlan[] = [
         transport: "The Hyundai 步行 15-20 分钟，或 Line 5 一站到 Yeouinaru。",
         highlights: ["便利店自动拉面机", "汉江夜景", "适合拍旅行第一晚的松弛感照片"],
         must: ["泡面 + 紫菜包饭", "香蕉牛奶或冰杯饮料", "带薄外套，江边晚上有风"],
+        places: [
+          {
+            name: "Yeouido Hangang Park",
+            specialty: "汉江夜景、便利店泡面、夜间散步",
+            image: "https://images.unsplash.com/photo-1608731789519-d766f7907272?auto=format&fit=crop&w=900&q=80",
+            detail: "汝矣岛汉江公园是这晚泡面和看夜景的主场，靠近 Yeouinaru 站的便利店最方便。",
+            order: "泡面 + 紫菜包饭 + 香蕉牛奶；选靠江边但不挡路的位置坐。",
+            logistics: "从 The Hyundai 步行过去最顺，太累就坐 Line 5 一站到 Yeouinaru。",
+            address: "서울특별시 영등포구 여의동로 330 (여의도동)",
+          },
+          {
+            name: "The Hyundai Seoul 回补",
+            specialty: "泡面前买甜点、饮料、小零食",
+            image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80",
+            detail: "如果公园便利店排队，先在 The Hyundai 地下层买饮料或甜点再走去汉江。",
+            order: "轻便饮料、甜点、可手拿小食。",
+            logistics: "百货本体关门时间较早，20:00 后以餐饮和便利店为主。",
+            address: "서울특별시 영등포구 여의대로 108 (여의도동)",
+          },
+        ],
       },
       {
         time: "22:00 - 22:45",
@@ -168,6 +204,35 @@ const plans: DayPlan[] = [
         transport: "明洞 Line 4 -> 忠武路换 Line 3 -> 景福宫。",
         highlights: ["韩服拍照最出片", "建筑纵深适合广角照片", "上午光线和体力都更好"],
         must: ["光化门正面", "勤政殿", "韩服租借店提前定"],
+        places: [
+          {
+            name: "Gyeongbokgung Palace",
+            specialty: "正宫建筑、韩服拍照、光化门机位",
+            image: "https://images.unsplash.com/photo-1638964663550-e2123ac8900b?auto=format&fit=crop&w=900&q=80",
+            detail: "Day 2 的传统文化核心景点，适合上午先拍大场景，再步行去北村和三清洞。",
+            order: "光化门正面、勤政殿、宫墙边韩服照。",
+            logistics: "周二闭馆；穿韩服可免景福宫门票，租赁店集中在景福宫/安国附近。",
+            address: "서울특별시 종로구 사직로 161 (세종로)",
+          },
+          {
+            name: "Kyochon 1991 安国店",
+            specialty: "附近炸鸡；午餐最省时间",
+            image: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=900&q=80",
+            detail: "景福宫和北村结束后，去安国店吃炸鸡是最不绕路的午餐选择。",
+            order: "Soy Garlic + Red 或 Honey 半半口味。",
+            logistics: "从景福宫步行到北村后顺路，避免午餐再跨区。",
+            address: "서울특별시 종로구 북촌로5길 43",
+          },
+          {
+            name: "三清洞小店街",
+            specialty: "韩屋街区、设计小店、茶馆和饰品",
+            image: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=900&q=80",
+            detail: "景福宫出来往北村方向走，会自然经过三清洞，适合轻逛小店和拍街景。",
+            order: "小饰品、文具、茶馆、韩屋街区照片。",
+            logistics: "不要在这里买太重的东西，下午还要去圣水。",
+            address: "서울특별시 종로구 삼청로 30 일대",
+          },
+        ],
       },
       {
         time: "11:00 - 12:30",
@@ -177,6 +242,35 @@ const plans: DayPlan[] = [
         transport: "从景福宫步行串联，结束后靠近安国站。",
         highlights: ["韩屋坡道视角", "小店和茶馆密度高", "比景福宫更适合慢慢拍街景"],
         must: ["北村经典上坡机位", "三清洞小店", "安国站附近咖啡"],
+        places: [
+          {
+            name: "Bukchon Hanok Village",
+            specialty: "韩屋坡道、传统街巷、安国站步行可达",
+            image: "https://images.unsplash.com/photo-1548115184-bc6544d06a58?auto=format&fit=crop&w=900&q=80",
+            detail: "北村是居民区和观光区混合区域，适合拍韩屋坡道，但要控制音量。",
+            order: "经典上坡机位、韩屋门窗细节、巷口远景。",
+            logistics: "尽量 11:00 前后拍完，避开中午人潮；不要长时间堵在居民门口。",
+            address: "서울특별시 종로구 계동길 37 (계동)",
+          },
+          {
+            name: "Object Samcheong",
+            specialty: "文具、生活杂货、设计师小物",
+            image: "https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=900&q=80",
+            detail: "北村/三清洞一带适合逛文具和生活小物，Object 类型小店很适合买轻便伴手礼。",
+            order: "贴纸、明信片、文具、杯垫、小摆件。",
+            logistics: "买小件即可，下午去圣水还有更多购物点。",
+            address: "서울특별시 종로구 북촌로5길 6",
+          },
+          {
+            name: "Cafe Layered 安国",
+            specialty: "英式甜点、司康、韩屋周边咖啡",
+            image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80",
+            detail: "如果北村拍完想短暂休息，可以在安国附近喝咖啡吃甜点。",
+            order: "Scone、蛋糕、冰美式。",
+            logistics: "只建议作为短暂停靠，别影响 12:30 午餐和下午圣水。",
+            address: "서울특별시 종로구 북촌로2길 2-3",
+          },
+        ],
       },
       {
         time: "12:30 - 14:00",
@@ -194,6 +288,7 @@ const plans: DayPlan[] = [
             detail: "在安国/三清洞动线内，Corner 指到地址 43 Bukchon-ro 5-gil，适合景福宫和北村后直接吃。",
             order: "半半口味：Soy Garlic + Red 或 Honey；搭配腌萝卜、啤酒/无酒精饮料。",
             logistics: "最少绕路，吃完去乙支路喝咖啡或直接转地铁去圣水。",
+            address: "서울특별시 종로구 북촌로5길 43",
           },
           {
             name: "Woo Lae Oak 乙支路",
@@ -202,6 +297,7 @@ const plans: DayPlan[] = [
             detail: "1946 年开业的经典老店，Michelin Guide 介绍为首尔知名平壤冷面餐厅；Tripadvisor 页面显示 4.2/5。",
             order: "Bulgogi + Pyongyang Naengmyeon；想吃烤肉但又不想太重，这家比纯五花肉更优雅。",
             logistics: "从安国/钟路过去顺路，适合把午餐和乙支路咖啡串起来。",
+            address: "서울특별시 중구 창경궁로 62-29",
           },
           {
             name: "Geumdwaeji Sikdang 药水",
@@ -210,6 +306,7 @@ const plans: DayPlan[] = [
             detail: "在药水站附近，以厚切猪肉、五花肉和猪颈肉出名，SEOULSHOPPER 也标注其自 2019 年起被 Michelin Guide 收录。",
             order: "Samgyeopsal + Moksal；如果能接受排队，这是烤肉优先级最高的一家。",
             logistics: "比前两家更绕、排队风险更高。若当天已经晚了，不建议强行去。",
+            address: "서울특별시 중구 다산로 149 (신당동)",
           },
         ],
       },
@@ -229,6 +326,7 @@ const plans: DayPlan[] = [
             detail: "Milestone Coffee Roasters 是常见中文游客版维也纳咖啡三巨头之一。SEOULSHOPPER 记录圣水店地址为 15 Seoulsup 4-gil，营业约 10:00-21:00。",
             order: "Iced Vienna Coffee / Einspänner；想吃甜点可加 Tiramisu。",
             logistics: "放在圣水扫店中段最顺，逛 Dior / Tamburins / Ader Error 之间进去坐 30-40 分钟。",
+            address: "서울특별시 성동구 서울숲4길 15 1층",
           },
           {
             name: "Dior Seongsu",
@@ -237,6 +335,7 @@ const plans: DayPlan[] = [
             detail: "重点是外观和概念店氛围，不一定要进店消费。",
             order: "拍外立面、门口花园感区域；如果排队太久只拍外观即可。",
             logistics: "圣水热门点之一，建议和 Tamburins、Ader Error 顺路串。",
+            address: "서울특별시 성동구 연무장5길 7",
           },
           {
             name: "Tamburins Seongsu",
@@ -245,6 +344,7 @@ const plans: DayPlan[] = [
             detail: "适合买轻便又有辨识度的香氛产品，送礼也好带。",
             order: "护手霜、香膏、香水小瓶；先闻再买，别只看包装。",
             logistics: "如果 Day 3 还去 Dosan 店，这里可以先试香，最后在狎鸥亭补买。",
+            address: "서울특별시 성동구 연무장5길 8",
           },
           {
             name: "Ader Error",
@@ -253,6 +353,7 @@ const plans: DayPlan[] = [
             detail: "适合看韩国潮流设计和空间陈列，服饰尺码和库存看现场。",
             order: "卫衣、T 恤、帽子、小包、联名配饰。",
             logistics: "试穿会耗时，若圣水只剩 2 小时，优先选 1-2 家认真逛。",
+            address: "서울특별시 성동구 연무장길 26 1층",
           },
           {
             name: "Onion Seongsu",
@@ -261,6 +362,7 @@ const plans: DayPlan[] = [
             detail: "圣水经典咖啡店，适合在扫店中段坐下回血。",
             order: "雪山面包；咖啡已经放 Milestone，这里可以只买面包或直接跳过。",
             logistics: "热门时段排队明显，和 Milestone 二选一即可，不建议两家都排队。",
+            address: "서울특별시 성동구 아차산로9길 8",
           },
         ],
       },
@@ -272,6 +374,35 @@ const plans: DayPlan[] = [
         transport: "圣水 Line 2 -> 新堂换 Line 6 -> 梨泰院。",
         highlights: ["国际化餐厅和酒吧密度高", "夜晚比白天更有氛围", "适合把第一天没去的松弛街区补上"],
         must: ["梨泰院 Class 天桥附近", "坡道街景", "晚餐或小酒馆"],
+        places: [
+          {
+            name: "Itaewon Class 天桥",
+            specialty: "经典韩剧机位、坡道街景",
+            image: "https://images.unsplash.com/photo-1534274867514-d5b47ef89ed7?auto=format&fit=crop&w=900&q=80",
+            detail: "梨泰院夜晚更有氛围，适合饭后散步拍街景，不必安排重购物。",
+            order: "拍坡道、路牌、天桥和夜景街道。",
+            logistics: "晚餐后顺路散步即可，太晚就打车回明洞。",
+            address: "서울특별시 용산구 이태원동 128-7 일대",
+          },
+          {
+            name: "Linus BBQ Itaewon",
+            specialty: "美式 BBQ、梨泰院晚餐备选",
+            image: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=900&q=80",
+            detail: "如果当天已经吃腻韩餐，梨泰院适合换成美式 BBQ 或异国餐。",
+            order: "Brisket、Pulled Pork、Ribs 拼盘。",
+            logistics: "梨泰院晚餐选择很多，看到排队过长就换邻近餐厅。",
+            address: "서울특별시 용산구 이태원로 136-13",
+          },
+          {
+            name: "Leeum Museum 周边",
+            specialty: "汉南/梨泰院之间的设计感散步区",
+            image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80",
+            detail: "如果不想喝酒，可以往汉南方向走，街区更安静也更适合拍建筑。",
+            order: "建筑外观、安静街景、附近小店。",
+            logistics: "夜间不建议走太远，控制在 20-30 分钟散步。",
+            address: "서울특별시 용산구 이태원로55길 60-16",
+          },
+        ],
       },
       {
         time: "21:30 - 22:00",
@@ -289,6 +420,7 @@ const plans: DayPlan[] = [
             detail: "韩国很常见的自助四格照品牌，适合晚饭后快速拍一组，不需要预约。",
             order: "选四格模板；拍 2-3 轮，最后选表情最自然的一版。",
             logistics: "梨泰院/明洞热门商圈都容易遇到，看到就拍，不建议专门绕远。",
+            address: "서울특별시 중구 명동8길 37 일대",
           },
           {
             name: "Photoism",
@@ -297,6 +429,7 @@ const plans: DayPlan[] = [
             detail: "Photoism 的相框和滤镜选择更丰富，适合想要更精致的大头贴效果。",
             order: "选证件风/半身照模板；如果有喜欢的联名框可以优先用。",
             logistics: "如果梨泰院没找到，回明洞后作为最后 20 分钟补拍项目。",
+            address: "서울특별시 용산구 신흥로 31",
           },
         ],
       },
@@ -354,6 +487,7 @@ const plans: DayPlan[] = [
             detail: "适合试墨镜、看装置和拍照。价格不一定最便宜，但款式和体验最好。",
             order: "墨镜、透明框、金属框；先拍型号，最后确认退税和库存。",
             logistics: "Day 3 时间有限，最多控制 45 分钟。",
+            address: "서울특별시 강남구 압구정로46길 50",
           },
           {
             name: "Tamburins Dosan",
@@ -362,6 +496,7 @@ const plans: DayPlan[] = [
             detail: "和 Gentle Monster 属同一审美系统，适合把香氛作为伴手礼。",
             order: "护手霜、蛋形香膏、小容量香水；适合送朋友。",
             logistics: "如果圣水店已买，这里只补缺货款。",
+            address: "서울특별시 강남구 압구정로46길 50",
           },
           {
             name: "Wiggle Wiggle",
@@ -370,6 +505,7 @@ const plans: DayPlan[] = [
             detail: "颜色强烈、可爱小物多，适合给香港朋友带轻便礼物。",
             order: "手机壳、杯子、贴纸、毛巾、小包。",
             logistics: "很容易买多，注意回程行李空间。",
+            address: "서울특별시 강남구 언주로168길 31",
           },
           {
             name: "Nudake",
@@ -378,6 +514,7 @@ const plans: DayPlan[] = [
             detail: "视觉效果强，适合作为皮肤科后的轻甜品停靠。",
             order: "招牌视觉系甜品 + 咖啡；不要点太多，后面还要赶机场。",
             logistics: "排队长就拍照离开，别压缩回酒店取行李时间。",
+            address: "서울특별시 강남구 압구정로46길 50",
           },
         ],
       },
@@ -571,6 +708,16 @@ function App() {
                                   {isPlaceExpanded ? (
                                     <div className="place-detail">
                                       <p>{place.detail}</p>
+                                      <div className="address-copy">
+                                        <span>{place.address}</span>
+                                        <button
+                                          type="button"
+                                          title="复制韩文地址"
+                                          onClick={() => navigator.clipboard.writeText(place.address)}
+                                        >
+                                          <Copy size={14} />
+                                        </button>
+                                      </div>
                                       <dl>
                                         <div>
                                           <dt>推荐点单/购买</dt>
