@@ -1,0 +1,645 @@
+:root {
+  color-scheme: light;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: #f4f0e8;
+  color: #1e2428;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(244, 240, 232, 0.95), rgba(235, 238, 232, 0.96)),
+    #f4f0e8;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-shell {
+  width: min(100%, 480px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 0 28px;
+  background: #fbfaf7;
+  box-shadow: 0 0 42px rgba(35, 45, 48, 0.14);
+}
+
+.hero {
+  position: relative;
+  min-height: 512px;
+  overflow: hidden;
+  color: #ffffff;
+  background: #1d2a30;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.96) contrast(1.02);
+}
+
+.hero::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(180deg, rgba(11, 19, 23, 0.1), rgba(11, 19, 23, 0.55) 46%, rgba(11, 19, 23, 0.9)),
+    linear-gradient(90deg, rgba(14, 31, 35, 0.68), rgba(14, 31, 35, 0.14));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 512px;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px 18px 22px;
+}
+
+.status-row {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.status-row span {
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(13, 22, 25, 0.42);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: 8em;
+  font-size: 42px;
+  line-height: 0.98;
+  font-weight: 900;
+}
+
+.hero p {
+  max-width: 25em;
+  margin-top: 13px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 15px;
+  line-height: 1.58;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 20px;
+}
+
+.summary-grid div {
+  min-height: 92px;
+  padding: 12px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  backdrop-filter: blur(16px);
+}
+
+.summary-grid svg,
+.summary-grid strong,
+.summary-grid span {
+  display: block;
+}
+
+.summary-grid strong {
+  margin-top: 9px;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.summary-grid span {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.day-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #e1ddd4;
+  background: rgba(251, 250, 247, 0.92);
+  backdrop-filter: blur(18px);
+}
+
+.day-tab {
+  min-width: 0;
+  min-height: 66px;
+  padding: 10px 8px;
+  border: 1px solid #ded8cc;
+  color: #3b4142;
+  background: #ffffff;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.day-tab span,
+.day-tab strong {
+  display: block;
+}
+
+.day-tab span {
+  color: #757067;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.day-tab strong {
+  margin-top: 6px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1.28;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.day-tab.active {
+  border-color: #1d6b62;
+  color: #ffffff;
+  background: #1d6b62;
+  box-shadow: 0 10px 26px rgba(29, 107, 98, 0.24);
+}
+
+.day-tab.active span {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.plan-card,
+.shopping-section,
+.ticket-section {
+  padding: 22px 16px 0;
+}
+
+.plan-heading {
+  display: grid;
+  gap: 12px;
+}
+
+.section-kicker {
+  display: block;
+  color: #b25a2b;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin-top: 5px;
+  color: #20282a;
+  font-size: 24px;
+  line-height: 1.18;
+}
+
+.plan-heading p {
+  color: #5d625f;
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+.route-bar {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px;
+  color: #214641;
+  border: 1px solid #cbdcd3;
+  background: #edf7f2;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 750;
+}
+
+.route-bar svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.timeline {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.stop-card {
+  display: grid;
+  gap: 8px;
+}
+
+.stop-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #6a6258;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.stop-main {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.stop-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  color: #ffffff;
+  background: #b25a2b;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(178, 90, 43, 0.24);
+}
+
+.stop-body,
+.shopping-card,
+.ticket-row {
+  border: 1px solid #e0dbd0;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(35, 45, 48, 0.06);
+}
+
+.stop-body {
+  min-width: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.stop-title-row {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  text-align: left;
+}
+
+.stop-title-row h3 {
+  color: #22292b;
+  font-size: 17px;
+  line-height: 1.24;
+}
+
+.stop-title-row span {
+  display: block;
+  margin-top: 4px;
+  color: #7e786f;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.stop-title-row p {
+  margin-top: 7px;
+  color: #555f5c;
+  font-size: 12px;
+  line-height: 1.42;
+}
+
+.stop-title-row .chevron {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  color: #8b8176;
+  transition: transform 160ms ease;
+}
+
+.stop-title-row .chevron.open {
+  transform: rotate(180deg);
+}
+
+.stop-detail-panel {
+  padding: 0 13px 13px;
+  border-top: 1px solid #eee8dd;
+}
+
+.transport-note {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 7px;
+  margin-top: 13px;
+  padding: 10px;
+  color: #33504c;
+  background: #f0f6f3;
+  border-radius: 8px;
+}
+
+.transport-note p {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.detail-grid div {
+  display: grid;
+  gap: 7px;
+  padding: 10px;
+  border: 1px solid #eee8dd;
+  background: #fbfaf7;
+  border-radius: 8px;
+}
+
+.detail-grid strong {
+  color: #22292b;
+  font-size: 12px;
+}
+
+.detail-grid span {
+  color: #5c615e;
+  font-size: 12px;
+  line-height: 1.42;
+}
+
+.shop-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid #e4d9c8;
+  background: #fff8ee;
+  border-radius: 8px;
+}
+
+.shop-list > strong {
+  color: #22292b;
+  font-size: 12px;
+}
+
+.shop-row {
+  display: grid;
+  gap: 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(178, 90, 43, 0.16);
+}
+
+.place-toggle {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 9px 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  text-align: left;
+}
+
+.place-toggle img {
+  width: 58px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #e8dfd2;
+}
+
+.place-toggle span {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.place-toggle b {
+  color: #8c461f;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.place-toggle small {
+  color: #5f5b54;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.place-toggle .chevron {
+  color: #8b8176;
+  transition: transform 160ms ease;
+}
+
+.place-toggle .chevron.open {
+  transform: rotate(180deg);
+}
+
+.place-detail {
+  display: grid;
+  gap: 9px;
+  padding: 0 0 11px 67px;
+}
+
+.place-detail p {
+  color: #4f5552;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.place-detail dl {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+}
+
+.place-detail dl div {
+  display: grid;
+  gap: 3px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.64);
+  border-radius: 8px;
+}
+
+.place-detail dt {
+  color: #22292b;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.place-detail dd {
+  margin: 0;
+  color: #63615b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 13px;
+}
+
+.section-title > svg {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  padding: 9px;
+  color: #ffffff;
+  background: #1d6b62;
+  border-radius: 8px;
+}
+
+.shopping-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.shopping-card {
+  padding: 14px;
+}
+
+.shopping-card > span {
+  display: inline-flex;
+  color: #b25a2b;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.shopping-card h3 {
+  margin-top: 5px;
+  color: #22292b;
+  font-size: 18px;
+}
+
+.shopping-card p {
+  margin-top: 7px;
+  color: #63645f;
+  font-size: 13px;
+  line-height: 1.48;
+}
+
+.shopping-card div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 11px;
+}
+
+.shopping-card b {
+  padding: 7px 9px;
+  color: #2f4b47;
+  background: #eef7f3;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.ticket-list {
+  display: grid;
+  gap: 10px;
+}
+
+.ticket-row {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 10px;
+  padding: 14px;
+}
+
+.ticket-row svg {
+  width: 32px;
+  height: 32px;
+  padding: 7px;
+  color: #ffffff;
+  background: #314044;
+  border-radius: 8px;
+}
+
+.ticket-row strong,
+.ticket-row span {
+  display: block;
+}
+
+.ticket-row strong {
+  color: #22292b;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.ticket-row span {
+  margin-top: 5px;
+  color: #5f6461;
+  font-size: 12px;
+  line-height: 1.52;
+}
+
+.app-footer {
+  display: grid;
+  gap: 6px;
+  padding: 22px 16px 0;
+  color: #817a70;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+@media (min-width: 760px) {
+  body {
+    padding: 28px 0;
+  }
+
+  .app-shell {
+    border-radius: 18px;
+    overflow: hidden;
+  }
+}
