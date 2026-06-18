@@ -46,6 +46,7 @@ type Stop = {
     order: string;
     logistics: string;
     address: string;
+    hours?: string;
   }[];
 };
 
@@ -179,6 +180,16 @@ const plans: DayPlan[] = [
             logistics: "落地日别排太久，吃完要赶去 The Hyundai 和汉江。",
             address: "서울특별시 중구 명동7길 18-1 1층",
           },
+          {
+            name: "Super Pet 明洞店",
+            specialty: "好看又相对便宜的宠物衣服、韩服、雨衣和小配件",
+            image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=900&q=80",
+            detail: "明洞最顺路的宠物服饰店，Corner 标注为宠物精品店，适合给小型犬买韩服、雨衣、背带、玩具和零食。",
+            order: "宠物韩服、小狗雨衣、背带、帽子、宠物包；先看尺码，拍照确认肩宽胸围。",
+            logistics: "和明洞晚餐/Olive Young 顺路，建议 Day 1 晚餐前后或 Day 2 回明洞后去，不需要专门绕路。",
+            address: "서울특별시 중구 명동10길 14-1",
+            hours: "约 09:00-23:30；以当天门店/地图显示为准。",
+          },
         ],
       },
       {
@@ -198,6 +209,16 @@ const plans: DayPlan[] = [
             order: "不买东西也值得上去看一眼，拍完再下 B1/B2。",
             logistics: "百货本体大约 20:00 左右结束营业，建议先拍中庭再逛地下层。",
             address: "서울특별시 영등포구 여의대로 108 (여의도동)",
+          },
+          {
+            name: "We, Pet 더현대서울",
+            specialty: "The Hyundai 5F 宠物生活方式店；衣服、包、推车、床和用品",
+            image: "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=900&q=80",
+            detail: "现代百货自营策划的宠物生活方式编辑店，The Hyundai Seoul 楼层指南列在 5F Culture 区，适合顺手看更精致的宠物服饰和用品。",
+            order: "宠物衣服、宠物包、牵引用品、床垫、手作零食；款式更精致，价格通常比 Super Pet 高。",
+            logistics: "Day 1 本来就去 The Hyundai，先逛 We, Pet 再去 B1/B2 买吃的，别拖到百货关门后。",
+            address: "서울특별시 영등포구 여의대로 108 더현대서울 5층",
+            hours: "周一-周四 10:30-20:00；周五-周日 10:30-20:30；以 The Hyundai Seoul 当日营业为准。",
           },
           {
             name: "B1/B2 食品区",
@@ -952,6 +973,12 @@ function App() {
                                         </button>
                                       </div>
                                       <dl>
+                                        {place.hours ? (
+                                          <div>
+                                            <dt>营业时间</dt>
+                                            <dd>{place.hours}</dd>
+                                          </div>
+                                        ) : null}
                                         <div>
                                           <dt>推荐点单/购买</dt>
                                           <dd>{place.order}</dd>
