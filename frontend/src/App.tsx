@@ -4,6 +4,7 @@ import {
   CalendarDays,
   Camera,
   ChevronDown,
+  CloudSun,
   Clock3,
   Coffee,
   Copy,
@@ -69,6 +70,27 @@ const iconMap = {
   beauty: Sparkles,
   transfer: Navigation,
 };
+
+const weatherCards = [
+  {
+    date: "6/19 周五",
+    title: "闷热，可能阵雨",
+    temp: "21-32°C",
+    advice: "落地日带折叠伞；汉江泡面保留，下雨就缩短拍照时间。",
+  },
+  {
+    date: "6/20 周六",
+    title: "潮湿转晴",
+    temp: "20-23°C",
+    advice: "最适合景福宫、北村和圣水暴走；穿透气鞋。",
+  },
+  {
+    date: "6/21 周日",
+    title: "晴云交替，午后可能阵雨",
+    temp: "18-29°C",
+    advice: "Daybeau 后补防晒，狎鸥亭逛街带伞即可。",
+  },
+];
 
 const plans: DayPlan[] = [
   {
@@ -240,8 +262,8 @@ const plans: DayPlan[] = [
         area: "Bukchon / Samcheong-dong",
         icon: "culture",
         transport: "从景福宫步行串联，结束后靠近安国站。",
-        highlights: ["韩屋坡道视角", "小店和茶馆密度高", "比景福宫更适合慢慢拍街景"],
-        must: ["北村经典上坡机位", "三清洞小店", "安国站附近咖啡"],
+        highlights: ["韩屋坡道视角", "小店和茶馆密度高", "附近正餐和咖啡选择很多"],
+        must: ["北村经典上坡机位", "黄生家刀削面", "London Bagel / Dotori / O’Sulloc 任选其一"],
         places: [
           {
             name: "Bukchon Hanok Village",
@@ -253,6 +275,33 @@ const plans: DayPlan[] = [
             address: "서울특별시 종로구 계동길 37 (계동)",
           },
           {
+            name: "黄生家刀削面",
+            specialty: "米其林 Bib Gourmand；牛骨刀削面和王饺子",
+            image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=900&q=80",
+            detail: "北村附近最适合当正餐的选择之一，比咖啡甜点更顶饱，适合景福宫和北村后直接吃。",
+            order: "牛骨刀削面 + 王饺子；两个人可以一面一饺子共享。",
+            logistics: "离北村动线近，午餐高峰可能排队；如果排队太久就改 Kyochon。",
+            address: "서울특별시 종로구 북촌로5길 78",
+          },
+          {
+            name: "London Bagel Museum Anguk",
+            specialty: "热门贝果；适合早午餐或打包",
+            image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80",
+            detail: "安国热门贝果店，适合拍照和打包，但排队风险高。",
+            order: "Potato Cheese Bagel、Spring Onion Pretzel Bagel、Cream Cheese。",
+            logistics: "只建议排队可控时去；否则打包或跳过，不要影响圣水。",
+            address: "서울특별시 종로구 북촌로4길 20",
+          },
+          {
+            name: "Dotori Garden Anguk",
+            specialty: "童话风咖啡甜点；酸奶和面包",
+            image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=80",
+            detail: "适合北村拍照后休息，风格比普通咖啡店更可爱。",
+            order: "Greek Yogurt、面包、咖啡；适合作为轻甜点。",
+            logistics: "如果午餐吃正餐，Dotori 只短暂停靠拍照买饮料。",
+            address: "서울특별시 종로구 계동길 19-8",
+          },
+          {
             name: "Object Samcheong",
             specialty: "文具、生活杂货、设计师小物",
             image: "https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=900&q=80",
@@ -260,6 +309,15 @@ const plans: DayPlan[] = [
             order: "贴纸、明信片、文具、杯垫、小摆件。",
             logistics: "买小件即可，下午去圣水还有更多购物点。",
             address: "서울특별시 종로구 북촌로5길 6",
+          },
+          {
+            name: "O’Sulloc Tea House Bukchon",
+            specialty: "抹茶、茶饮、韩屋氛围甜点",
+            image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=80",
+            detail: "想要更安静的茶饮和抹茶甜点，可以选 O’Sulloc，不用强行挤贝果店。",
+            order: "抹茶拿铁、绿茶甜点、茶类伴手礼。",
+            logistics: "适合替代 Cafe Layered 或 London Bagel，动线仍在北村附近。",
+            address: "서울특별시 종로구 북촌로11나길 26",
           },
           {
             name: "Cafe Layered 安国",
@@ -616,6 +674,26 @@ function App() {
           </button>
         ))}
       </nav>
+
+      <section className="weather-section">
+        <div className="section-title">
+          <CloudSun size={19} />
+          <div>
+            <span className="section-kicker">Weather</span>
+            <h2>6/19-6/21 天气提醒</h2>
+          </div>
+        </div>
+        <div className="weather-grid">
+          {weatherCards.map((item) => (
+            <article className="weather-card" key={item.date}>
+              <span>{item.date}</span>
+              <strong>{item.title}</strong>
+              <b>{item.temp}</b>
+              <p>{item.advice}</p>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section className="plan-card">
         <div className="plan-heading">

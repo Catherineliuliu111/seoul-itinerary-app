@@ -216,10 +216,49 @@ h1 {
   color: rgba(255, 255, 255, 0.76);
 }
 
+.weather-section,
 .plan-card,
 .shopping-section,
 .ticket-section {
   padding: 22px 16px 0;
+}
+
+.weather-grid {
+  display: grid;
+  gap: 9px;
+}
+
+.weather-card {
+  display: grid;
+  gap: 5px;
+  padding: 13px;
+  border: 1px solid #dce5dc;
+  background: #f4faf6;
+  border-radius: 8px;
+  box-shadow: 0 10px 22px rgba(35, 45, 48, 0.05);
+}
+
+.weather-card span {
+  color: #1d6b62;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.weather-card strong {
+  color: #22292b;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.weather-card b {
+  color: #b25a2b;
+  font-size: 13px;
+}
+
+.weather-card p {
+  color: #5f6461;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .plan-heading {
