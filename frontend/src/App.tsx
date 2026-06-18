@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Bus,
   CalendarDays,
@@ -52,12 +52,23 @@ type Stop = {
 type DayPlan = {
   id: string;
   day: string;
+  date: string;
   title: string;
   route: string;
   mood: string;
   image: string;
   imageCredit: string;
   stops: Stop[];
+};
+
+type WeatherCard = {
+  date: string;
+  label: string;
+  title: string;
+  temp: string;
+  advice: string;
+  updatedAt?: string;
+  source?: "live" | "fallback";
 };
 
 const iconMap = {
@@ -71,31 +82,70 @@ const iconMap = {
   transfer: Navigation,
 };
 
-const weatherCards = [
-  {
-    date: "6/19 周五",
+const weatherFallback: Record<string, WeatherCard> = {
+  "2026-06-19": {
+    date: "2026-06-19",
+    label: "6/19 周五",
     title: "闷热，可能阵雨",
     temp: "21-32°C",
     advice: "落地日带折叠伞；汉江泡面保留，下雨就缩短拍照时间。",
+    source: "fallback",
   },
-  {
-    date: "6/20 周六",
+  "2026-06-20": {
+    date: "2026-06-20",
+    label: "6/20 周六",
     title: "潮湿转晴",
     temp: "20-23°C",
     advice: "最适合景福宫、北村和圣水暴走；穿透气鞋。",
+    source: "fallback",
   },
-  {
-    date: "6/21 周日",
+  "2026-06-21": {
+    date: "2026-06-21",
+    label: "6/21 周日",
     title: "晴云交替，午后可能阵雨",
     temp: "18-29°C",
     advice: "Daybeau 后补防晒，狎鸥亭逛街带伞即可。",
+    source: "fallback",
   },
-];
+};
+
+function describeWeather(code: number) {
+  if (code === 0) return "晴";
+  if ([1, 2, 3].includes(code)) return "晴云交替";
+  if ([45, 48].includes(code)) return "有雾";
+  if ([51, 53, 55, 56, 57].includes(code)) return "毛毛雨";
+  if ([61, 63, 65, 66, 67].includes(code)) return "有雨";
+  if ([71, 73, 75, 77].includes(code)) return "降雪";
+  if ([80, 81, 82].includes(code)) return "阵雨";
+  if ([95, 96, 99].includes(code)) return "雷阵雨";
+  return "天气多变";
+}
+
+function adviceForWeather(date: string, code: number, maxTemp: number) {
+  const rainy = code >= 51 || [45, 48].includes(code);
+  if (date === "2026-06-19") {
+    return rainy
+      ? "落地日带折叠伞；汉江泡面保留，下雨就缩短拍照时间。"
+      : "落地日偏热，汉江泡面可保留；带防晒和薄外套。";
+  }
+  if (date === "2026-06-20") {
+    return rainy
+      ? "景福宫和北村路面可能湿滑，穿防滑透气鞋，圣水店内活动可照常。"
+      : "最适合景福宫、北村和圣水暴走；穿透气鞋。";
+  }
+  if (date === "2026-06-21") {
+    return rainy
+      ? "Daybeau 后避免暴晒，狎鸥亭逛街带伞，回机场预留机动时间。"
+      : "Daybeau 后补防晒，狎鸥亭逛街轻装即可。";
+  }
+  return maxTemp >= 30 ? "天气偏热，补水、防晒、少背重物。" : "按原计划走，带轻便雨伞备用。";
+}
 
 const plans: DayPlan[] = [
   {
     id: "day1",
     day: "Day 1",
+    date: "2026-06-19",
     title: "明洞落地开吃，汝矣岛购物后汉江泡面",
     route: "仁川机场 -> 明洞 -> The Hyundai Seoul -> 汝矣岛汉江公园",
     mood: "第一天不硬逛远点，把夜景、泡面、商场和明洞吃饭串成一条线。",
@@ -212,6 +262,7 @@ const plans: DayPlan[] = [
   {
     id: "day2",
     day: "Day 2",
+    date: "2026-06-20",
     title: "传统文化暴走，圣水洞扫店，晚上梨泰院",
     route: "明洞 -> 景福宫 -> 北村 -> 圣水洞 -> 梨泰院",
     mood: "白天拍传统建筑和街区，下午切到圣水潮流店，晚上把梨泰院的夜生活补上。",
@@ -496,6 +547,7 @@ const plans: DayPlan[] = [
   {
     id: "day3",
     day: "Day 3",
+    date: "2026-06-21",
     title: "Daybeau 变美，狎鸥亭罗德奥收尾",
     route: "明洞 -> Daybeau -> 狎鸥亭罗德奥 -> 机场",
     mood: "回程日只安排一条江南线，皮肤科之后轻逛、轻买、按时回机场。",
@@ -620,10 +672,67 @@ function App() {
   const [activeDay, setActiveDay] = useState(plans[0].id);
   const [expandedStop, setExpandedStop] = useState<string | null>(null);
   const [expandedPlace, setExpandedPlace] = useState<string | null>(null);
+  const [weatherByDate, setWeatherByDate] = useState<Record<string, WeatherCard>>(weatherFallback);
+  const [weatherLoading, setWeatherLoading] = useState(true);
   const currentPlan = useMemo(
     () => plans.find((plan) => plan.id === activeDay) ?? plans[0],
     [activeDay],
   );
+  const currentWeather = weatherByDate[currentPlan.date] ?? weatherFallback[currentPlan.date];
+
+  useEffect(() => {
+    let ignore = false;
+    const endpoint =
+      "https://api.open-meteo.com/v1/forecast" +
+      "?latitude=37.5665&longitude=126.9780" +
+      "&daily=weather_code,temperature_2m_max,temperature_2m_min" +
+      "&timezone=Asia%2FSeoul&start_date=2026-06-19&end_date=2026-06-21";
+
+    setWeatherLoading(true);
+    fetch(endpoint, { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error("Weather request failed");
+        return response.json();
+      })
+      .then((payload) => {
+        if (ignore) return;
+        const next = { ...weatherFallback };
+        const times = payload.daily?.time ?? [];
+        const codes = payload.daily?.weather_code ?? [];
+        const maxTemps = payload.daily?.temperature_2m_max ?? [];
+        const minTemps = payload.daily?.temperature_2m_min ?? [];
+        times.forEach((date: string, index: number) => {
+          if (!weatherFallback[date]) return;
+          const code = Number(codes[index]);
+          const maxTemp = Math.round(Number(maxTemps[index]));
+          const minTemp = Math.round(Number(minTemps[index]));
+          next[date] = {
+            ...weatherFallback[date],
+            title: describeWeather(code),
+            temp: `${minTemp}-${maxTemp}°C`,
+            advice: adviceForWeather(date, code, maxTemp),
+            updatedAt: new Date().toLocaleString("zh-CN", {
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+            source: "live",
+          };
+        });
+        setWeatherByDate(next);
+      })
+      .catch(() => {
+        if (!ignore) setWeatherByDate(weatherFallback);
+      })
+      .finally(() => {
+        if (!ignore) setWeatherLoading(false);
+      });
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   return (
     <main className="app-shell">
@@ -680,19 +789,20 @@ function App() {
           <CloudSun size={19} />
           <div>
             <span className="section-kicker">Weather</span>
-            <h2>6/19-6/21 天气提醒</h2>
+            <h2>{currentPlan.day} 天气提醒</h2>
           </div>
         </div>
-        <div className="weather-grid">
-          {weatherCards.map((item) => (
-            <article className="weather-card" key={item.date}>
-              <span>{item.date}</span>
-              <strong>{item.title}</strong>
-              <b>{item.temp}</b>
-              <p>{item.advice}</p>
-            </article>
-          ))}
-        </div>
+        <article className="weather-card featured">
+          <span>{currentWeather.label}</span>
+          <strong>{weatherLoading ? "正在实时查询首尔天气..." : currentWeather.title}</strong>
+          <b>{weatherLoading ? "--" : currentWeather.temp}</b>
+          <p>{weatherLoading ? "每次打开或刷新页面都会重新获取最新预报。" : currentWeather.advice}</p>
+          <small>
+            {currentWeather.source === "live" && currentWeather.updatedAt
+              ? `实时更新 ${currentWeather.updatedAt}`
+              : "天气接口不可用时显示备用提醒"}
+          </small>
+        </article>
       </section>
 
       <section className="plan-card">

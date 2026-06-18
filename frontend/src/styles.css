@@ -223,11 +223,6 @@ h1 {
   padding: 22px 16px 0;
 }
 
-.weather-grid {
-  display: grid;
-  gap: 9px;
-}
-
 .weather-card {
   display: grid;
   gap: 5px;
@@ -236,6 +231,13 @@ h1 {
   background: #f4faf6;
   border-radius: 8px;
   box-shadow: 0 10px 22px rgba(35, 45, 48, 0.05);
+}
+
+.weather-card.featured {
+  border-color: #c5ddd1;
+  background:
+    linear-gradient(135deg, rgba(244, 250, 246, 0.96), rgba(255, 248, 238, 0.92)),
+    #f4faf6;
 }
 
 .weather-card span {
@@ -259,6 +261,12 @@ h1 {
   color: #5f6461;
   font-size: 12px;
   line-height: 1.45;
+}
+
+.weather-card small {
+  color: #7d776d;
+  font-size: 11px;
+  font-weight: 750;
 }
 
 .plan-heading {
